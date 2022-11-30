@@ -8,13 +8,17 @@ const Cart = (props) => {
     const cartCtx = useContext(CartContext);
     const hasItem = cartCtx.items.length > 0;
 
-    const cartItemAddHandler = (item) => {};
-    const cartItemRemoveHandler = (id) => {};
+    const cartItemAddHandler = (item) => {
+        cartCtx.addItem({...item,quantity:1});
+    };
+    const cartItemRemoveHandler = (id) => {
+        cartCtx.removeItem(id);
+    };
 
     const items = cartCtx.items.map((item) => {
         // console.log(item.name);
         return (
-            <CartItem id={item.id} key={item.id} name={item.name} price={item.price} quantity={item.quantity} onAdd={cartItemAddHandler} onRemove={cartItemRemoveHandler} />
+            <CartItem id={item.id} key={item.id} name={item.name} price={item.price} quantity={item.quantity} onAdd={cartItemAddHandler.bind(null,item)} onRemove={cartItemRemoveHandler.bind(null,item.id)} />
         );
     });
     let totalPrice = 0;
@@ -25,7 +29,7 @@ const Cart = (props) => {
             <ul className={css['cart-items']}>{items}</ul>
             <div className={css.total}>
                 <span>Total Amount</span>
-                <span>{totalPrice}</span>
+                <span>{`Rs. ${totalPrice}`}</span>
             </div>
             <div className={css.actions}>
                 <button className={css['button--alt']} onClick={props.onHide}>Close</button>
