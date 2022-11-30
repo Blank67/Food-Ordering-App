@@ -5,20 +5,17 @@ import css from './MealItemForm.module.css';
 
 const MealItemForm = (props) => {
     const cartCtx = useContext(CartContext);
-    // console.log('Inside MealItemForm cartCtx->' ,cartCtx);
 
     const addItemToCart = (event) => {
         //Add item to CartContext
         event.preventDefault();
-        const quantity = document.getElementById(props.id).value;
+        const quantity = document.getElementById('amount_'+props.id).value;
         cartCtx.addItem({...props.item, quantity:quantity});
-        // console.log('Inside MealItemForm addItemToCart() cartCtx.items->' ,cartCtx);
     };
 
     return (
         <form className={css.form}>
-            {/* {console.log('Inside MealItemForm return cartCtx.items->', cartCtx.items)} */}
-            <Input input={{id:props.id, label:'Amount', type:'number', defaultValue:'1', step:'1', min:'1'}} />
+            <Input input={{id:'amount_'+props.id, label:'Amount', type:'number', defaultValue:'1', step:'1', min:'1'}} />
             <button onClick={addItemToCart}>ADD</button>
         </form>
     );
