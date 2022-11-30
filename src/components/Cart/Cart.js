@@ -7,13 +7,14 @@ import CartItem from './CartItem';
 const Cart = (props) => {
     const cartCtx = useContext(CartContext);
     const hasItem = cartCtx.items.length > 0;
+
     const cartItemAddHandler = (item) => {};
     const cartItemRemoveHandler = (id) => {};
 
     const items = cartCtx.items.map((item) => {
-        console.log(item.name);
+        // console.log(item.name);
         return (
-            <CartItem key={item.id} name={item.name} price={item.price} quantity={item.quantity} onAdd={cartItemAddHandler} onRemove={cartItemRemoveHandler} />
+            <CartItem id={item.id} key={item.id} name={item.name} price={item.price} quantity={item.quantity} onAdd={cartItemAddHandler} onRemove={cartItemRemoveHandler} />
         );
     });
     let totalPrice = 0;
