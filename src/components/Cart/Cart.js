@@ -24,6 +24,12 @@ const Cart = (props) => {
     let totalPrice = 0;
     cartCtx.items.forEach((item) => {totalPrice = (item.price * item.quantity).toFixed(2)});
 
+    const onOrderClickHandler = () => {
+        props.onHide();
+        props.onOrderShow();
+        cartCtx.orderItems();
+    }
+
     return (
         <Modal onClick={props.onHide}>
             <ul className={css['cart-items']}>{items}</ul>
@@ -33,7 +39,7 @@ const Cart = (props) => {
             </div>
             <div className={css.actions}>
                 <button className={css['button--alt']} onClick={props.onHide}>Close</button>
-                {hasItem && <button className={css.button}>Order</button>}
+                {hasItem && <button className={css.button} onClick={onOrderClickHandler} >Order</button>}
             </div>
         </Modal>
     );
